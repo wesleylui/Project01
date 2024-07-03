@@ -54,6 +54,11 @@ public class Application {
 				double number = scanner.nextDouble();
 				System.out.println("Result: " + factorial(number));
 				break;
+
+			case "factorial bar":
+				System.out.println("Enter a number: ");
+				long number1 = scanner.nextLong();
+				System.out.println(factorialAlt(number1));
 			}
 		}
 
@@ -80,11 +85,68 @@ public class Application {
 		}
 	}
 
+	// Exponentiation
+	public static double power(double base, double exponent) {
+		return Math.pow(base, exponent);
+	}
+
+	// Square root
+	public static double sqrt(double num) {
+		return Math.sqrt(num);
+	}
+
+	// Natural logarithm
+	public static double log(double num) {
+		return Math.log(num);
+	}
+
+	// Base-10 logarithm
+	public static double log10(double num) {
+		return Math.log10(num);
+	}
+
+	// Sine function
+	public static double sin(double angleRadians) {
+		return Math.sin(angleRadians);
+		//trig funcs expect args in radians. convert back to degrees when printing result?
+	}
+
+	// Cosine function
+	public static double cos(double angleRadians) {
+		return Math.cos(angleRadians);
+	}
+
+	// Tangent function
+	public static double tan(double angleRadians) {
+		return Math.tan(angleRadians);
+	}
+
+	// factorial using recursion
 	public static double factorial(double n) {
 		if (n <= 1) {
 			return 1;
 		} else {
 			return n * factorial(n - 1);
 		}
+	}
+
+	// factorial using loop, helper function, and progress bar
+	public static long factorialAlt(int num) {
+		if (num < 0) {
+			System.out.println("Factorial of negative number is undefined.");
+			return 0;
+		}
+		return factorialHelper(num, num);
+	}
+
+	// helper function for factorialAlt
+	private static long factorialHelper(int originalNum, int num) {
+		if (num <= 1) {
+			return 1;
+		}
+		// Calculate progress and update progress bar
+		int progress = (int) (((originalNum - num) / (double) originalNum) * 100);
+		System.out.println("\rCalculating factorial: " + progress + "%");
+		return num * factorialHelper(originalNum, num - 1);
 	}
 }
