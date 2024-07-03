@@ -12,56 +12,83 @@ import java.util.Scanner;
 
 public class Application {
 	public static void main(String[] args) {
-		if (args.length > 0) {
-			// Process CLI arguments
-		} else {
-			// No CLI arguments, ask for user input
-			Scanner scanner = new Scanner(System.in);
-			System.out.println("Enter operation (e.g., add, subtract, multiply, divide, factorial):");
+		Scanner scanner = new Scanner(System.in);
+
+		while (true) {
+			System.out.println(
+					"\nEnter operation (add, subtract, multiply, divide, pow, sqrt, log, log10, sin, cos, tan, factorial) or 'exit' to quit:)");
 			String operation = scanner.next();
 
-			switch (operation.toLowerCase()) {
-			case "add":
-				System.out.println("Enter the first operand: ");
-				double num1 = scanner.nextDouble();
-				System.out.println("Enter the second operand: ");
-				double num2 = scanner.nextDouble();
-				System.out.println("Result: " + add(num1, num2));
+			if (operation.equalsIgnoreCase("exit")) {
+				System.out.println("Exiting calculator...");
 				break;
-			case "subtract":
-				System.out.println("Enter the first operand: ");
-				double num3 = scanner.nextDouble();
-				System.out.println("Enter the second operand: ");
-				double num4 = scanner.nextDouble();
-				System.out.println("Result: " + subtract(num3, num4));
-				break;
-			case "multiply":
-				System.out.println("Enter the first operand: ");
-				double num5 = scanner.nextDouble();
-				System.out.println("Enter the second operand: ");
-				double num6 = scanner.nextDouble();
-				System.out.println("Result: " + multiply(num5, num6));
-				break;
-			case "divide":
-				System.out.println("Enter the first operand: ");
-				double num7 = scanner.nextDouble();
-				System.out.println("Enter the second operand: ");
-				double num8 = scanner.nextDouble();
-				System.out.println("Result: " + divide(num7, num8));
-				break;
-			case "factorial":
-				System.out.println("Enter a number: ");
-				double number = scanner.nextDouble();
-				System.out.println("Result: " + factorial(number));
-				break;
+			}
 
-			case "factorial bar":
-				System.out.println("Enter a number: ");
-				long number1 = scanner.nextLong();
-				System.out.println(factorialAlt(number1));
+			// For operations requiring two inputs
+			if (!operation.equalsIgnoreCase("sqrt") && !operation.equalsIgnoreCase("log")
+					&& !operation.equalsIgnoreCase("log10") && !operation.equalsIgnoreCase("sin")
+					&& !operation.equalsIgnoreCase("cos") && !operation.equalsIgnoreCase("tan")
+					&& !operation.equalsIgnoreCase("factorial")) {
+				System.out.println("Enter first number: ");
+				double num1 = scanner.nextDouble();
+				System.out.println("Enter second number: ");
+				double num2 = scanner.nextDouble();
+
+				switch (operation.toLowerCase()) {
+				case "add":
+					System.out.println("Result" + add(num1, num2));
+					break;
+				case "subtract":
+					System.out.println("Result: " + subtract(num1, num2));
+					break;
+				case "multiply":
+					System.out.println("Result: " + multiply(num1, num2));
+					break;
+				case "divide":
+					System.out.println("Result: " + divide(num1, num2));
+					break;
+				case "pow":
+					System.out.println("Result: " + power(num1, num2));
+					break;
+				default:
+					System.out.println("Invalid operation.");
+					break;
+				}
+			} else {
+				// For operations requiring one input
+				System.out.println("Enter number: ");
+				double num = scanner.nextDouble();
+
+				switch (operation.toLowerCase()) {
+				case "sqrt":
+					System.out.println("Result: " + sqrt(num));
+					break;
+				case "log":
+					System.out.println("Result: " + log(num));
+					break;
+				case "log10":
+					System.out.println("Result: " + log10(num));
+					break;
+				case "sin":
+					System.out.println("Result: " + sin(num));
+					break;
+				case "cos":
+					System.out.println("Result: " + cos(num));
+					break;
+				case "tan":
+					System.out.println("Result: " + tan(num));
+					break;
+				case "factorial":
+					// Factorial special case: requires an integer
+					System.out.println("Result: " + factorial((int) num));
+					break;
+				default:
+					System.out.println("Invalid operation.");
+					break;
+				}
 			}
 		}
-
+		scanner.close();
 	}
 
 	public static double add(double a, double b) {
@@ -108,7 +135,8 @@ public class Application {
 	// Sine function
 	public static double sin(double angleRadians) {
 		return Math.sin(angleRadians);
-		//trig funcs expect args in radians. convert back to degrees when printing result?
+		// trig funcs expect args in radians. convert back to degrees when printing
+		// result?
 	}
 
 	// Cosine function
