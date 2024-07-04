@@ -50,6 +50,12 @@ public class Application {
 				case "pow":
 					System.out.println("Result: " + power(num1, num2));
 					break;
+				case "permutations":
+					System.out.println("Result: " + permutations(num1, num2));
+					break;
+				case "permutationsAlt":
+					System.out.println("Result: " + permutationsAlt(num1, num2));
+					break;
 				default:
 					System.out.println("Invalid operation.");
 					break;
@@ -160,7 +166,7 @@ public class Application {
 
 	// factorial using recursion
 	public static double factorial(double n) {
-		if (n <= 1) {
+		if (n < 1) {
 			return 1;
 		} else {
 			return n * factorial(n - 1);
@@ -185,5 +191,47 @@ public class Application {
 		int progress = (int) (((originalNum - num) / (double) originalNum) * 100);
 		System.out.println("\rCalculating factorial: " + progress + "%");
 		return num * factorialHelper(originalNum, num - 1);
+	}
+
+	// permutations without replacement
+	private static double permutations(double a, double b) {
+		/*
+		 * formula: nPr. n! / (n - r)! a: num of elements in array b: number of items to
+		 * be selected
+		 * 
+		 * in case of error, zero is returned
+		 */
+		if (a <= 0 || a > 100) {
+			System.out.println("Size of array must be between 1 and 100.");
+			return 0;
+		} else if (b > a) {
+			System.out.println("Number of selected items must not exceed array size.");
+			return 0;
+		}
+		return (factorial(a) / factorial(a - b));
+	}
+
+	// permutations without recursion
+	private static double permutationsAlt(double a, double b) {
+		if (a < 0 || a > 100) {
+			System.out.println("Size of array must not be negative or less than 100.");
+			return 0;
+		} else if (b > a) {
+			System.out.println("Number of selected items must not exceed array size.");
+			return 0;
+		}
+		return (iterativeFactorial(a) / iterativeFactorial(a - b));
+	}
+
+	// non recursive factorial. helper function for permutationsAlt
+	private static double iterativeFactorial(double num) {
+		if (num <= 1) {
+			return 1;
+		}
+		double result = 1;
+		for (double i = 2; i <= num; i++) {
+			result *= i;
+		}
+		return result;
 	}
 }
