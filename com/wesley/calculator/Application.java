@@ -28,7 +28,7 @@ public class Application {
 			if (!operation.equalsIgnoreCase("sqrt") && !operation.equalsIgnoreCase("log")
 					&& !operation.equalsIgnoreCase("log10") && !operation.equalsIgnoreCase("sin")
 					&& !operation.equalsIgnoreCase("cos") && !operation.equalsIgnoreCase("tan")
-					&& !operation.equalsIgnoreCase("factorial")) {
+					&& !operation.equalsIgnoreCase("factorial") && !operation.equalsIgnoreCase("progress")) {
 				System.out.println("Enter first number: ");
 				double num1 = scanner.nextDouble();
 				System.out.println("Enter second number: ");
@@ -36,7 +36,7 @@ public class Application {
 
 				switch (operation.toLowerCase()) {
 				case "add":
-					System.out.println("Result" + add(num1, num2));
+					System.out.println("Result: " + add(num1, num2));
 					break;
 				case "subtract":
 					System.out.println("Result: " + subtract(num1, num2));
@@ -81,6 +81,11 @@ public class Application {
 				case "factorial":
 					// Factorial special case: requires an integer
 					System.out.println("Result: " + factorial((int) num));
+					break;
+				case "progress":
+					// progress bar version of factorial
+					long result = factorialAlt((int) num);
+					System.out.println("Factorial of " + num + " is: " + result);
 					break;
 				default:
 					System.out.println("Invalid operation.");
@@ -133,19 +138,23 @@ public class Application {
 	}
 
 	// Sine function
-	public static double sin(double angleRadians) {
+	public static double sin(double angleDegrees) {
+		/*
+		 * user inputs angle in degrees convert to radians for the Math function
+		 */
+		double angleRadians = Math.toRadians(angleDegrees);
 		return Math.sin(angleRadians);
-		// trig funcs expect args in radians. convert back to degrees when printing
-		// result?
 	}
 
 	// Cosine function
-	public static double cos(double angleRadians) {
+	public static double cos(double angleDegrees) {
+		double angleRadians = Math.toRadians(angleDegrees);
 		return Math.cos(angleRadians);
 	}
 
 	// Tangent function
-	public static double tan(double angleRadians) {
+	public static double tan(double angleDegrees) {
+		double angleRadians = Math.toRadians(angleDegrees);
 		return Math.tan(angleRadians);
 	}
 
