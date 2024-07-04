@@ -16,7 +16,7 @@ public class Application {
 
 		while (true) {
 			System.out.println(
-					"\nEnter operation (add, subtract, multiply, divide, pow, sqrt, log, log10, sin, cos, tan, factorial) or 'exit' to quit:)");
+					"\nEnter operation (add, subtract, multiply, divide, pow, sqrt, log, log10, sin, cos, tan, factorial, progress) or 'exit' to quit:)");
 			String operation = scanner.next();
 
 			if (operation.equalsIgnoreCase("exit")) {
@@ -173,6 +173,7 @@ public class Application {
 		}
 	}
 
+	//factorial with progress bar. operation name: progress
 	// factorial using loop, helper function, and progress bar
 	public static long factorialAlt(int num) {
 		if (num < 0) {
